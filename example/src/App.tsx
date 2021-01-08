@@ -26,7 +26,10 @@ export default function App() {
           fontSize: 25,
         }}
       />
-      <ReactNativeStripeCardInput style={styles.cardInput} onInputChange={() => console.log('TOUCHED ReactNativeStripeCardInput')}/>
+      <ReactNativeStripeCardInput
+        style={styles.cardInput}
+        onInputChange={() => console.log('TOUCHED ReactNativeStripeCardInput')}
+      />
     </View>
   );
 }
