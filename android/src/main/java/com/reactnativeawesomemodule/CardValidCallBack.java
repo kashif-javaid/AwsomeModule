@@ -34,7 +34,7 @@ public class CardValidCallBack implements com.stripe.android.view.CardValidCallb
       .dispatchEvent(new Event(paymentView.getId()) {
         @Override
         public String getEventName() {
-          return "topTouch";
+          return "onInputChanged";
         }
 
         @Override
