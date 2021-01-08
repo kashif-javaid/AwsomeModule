@@ -1,13 +1,24 @@
 package com.reactnativeawesomemodule;
 
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.ViewGroupManager;
+import com.facebook.react.uimanager.events.Event;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
+import com.stripe.android.view.CardInputListener;
+import com.stripe.android.view.CardMultilineWidget;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -21,13 +32,98 @@ class ReactNativeStripeCardInputViewManager extends ViewGroupManager<LinearLayou
     return REACT_CLASS;
   }
 
+//  @Override
+//  @Nullable
+//  public Map getExportedCustomDirectEventTypeConstants() {
+//    return MapBuilder.of(
+//      "onInputChanged",
+//      MapBuilder.of("registrationName", "onInputChanged")
+//    );
+//  }
+
+  public Map getExportedCustomBubblingEventTypeConstants() {
+    return MapBuilder.builder()
+      .put(
+        "topTouch",
+        MapBuilder.of(
+          "phasedRegistrationNames",
+          MapBuilder.of("bubbled", "onTouch")))
+      .build();
+  }
+
   @Override
-  @Nullable
-  public Map getExportedCustomDirectEventTypeConstants() {
-    return MapBuilder.of(
-      "onInputChanged",
-      MapBuilder.of("registrationName", "onInputChanged")
-    );
+  protected void addEventEmitters(@NonNull ThemedReactContext reactContext, @NonNull LinearLayout view) {
+    super.addEventEmitters(reactContext, view);
+
+    ((CardMultilineWidget)view.findViewById(R.id.card_multiline_widget)).setCardInputListener(new CardInputListener() {
+      @Override
+      public void onFocusChange(@NotNull FocusField focusField) {
+        final WritableMap eventData = Arguments.createMap();
+        reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher()
+          .dispatchEvent(new Event(view.getId()) {
+            @Override
+            public String getEventName() {
+              return "topTouch";
+            }
+
+            @Override
+            public void dispatch(RCTEventEmitter rctEventEmitter) {
+              rctEventEmitter.receiveEvent(getViewTag(), getEventName(), eventData);
+            }
+          });
+      }
+
+      @Override
+      public void onCardComplete() {
+        final WritableMap eventData = Arguments.createMap();
+        reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher()
+          .dispatchEvent(new Event(view.getId()) {
+            @Override
+            public String getEventName() {
+              return "topTouch";
+            }
+
+            @Override
+            public void dispatch(RCTEventEmitter rctEventEmitter) {
+              rctEventEmitter.receiveEvent(getViewTag(), getEventName(), eventData);
+            }
+          });
+      }
+
+      @Override
+      public void onExpirationComplete() {
+        final WritableMap eventData = Arguments.createMap();
+        reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher()
+          .dispatchEvent(new Event(view.getId()) {
+            @Override
+            public String getEventName() {
+              return "topTouch";
+            }
+
+            @Override
+            public void dispatch(RCTEventEmitter rctEventEmitter) {
+              rctEventEmitter.receiveEvent(getViewTag(), getEventName(), eventData);
+            }
+          });
+      }
+
+      @Override
+      public void onCvcComplete() {
+        final WritableMap eventData = Arguments.createMap();
+        reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher()
+          .dispatchEvent(new Event(view.getId()) {
+            @Override
+            public String getEventName() {
+              return "topTouch";
+            }
+
+            @Override
+            public void dispatch(RCTEventEmitter rctEventEmitter) {
+              rctEventEmitter.receiveEvent(getViewTag(), getEventName(), eventData);
+            }
+          });
+      }
+    });
   }
 
   @NonNull
