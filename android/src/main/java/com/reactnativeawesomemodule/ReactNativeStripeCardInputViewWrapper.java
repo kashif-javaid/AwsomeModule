@@ -19,16 +19,6 @@ public class ReactNativeStripeCardInputViewWrapper extends LinearLayout {
     cardMultilineView = View.inflate(context, R.layout.react_native_stripe_card_input, this);
     paymentView = cardMultilineView.findViewById(R.id.card_multiline_widget);
     paymentView.setShouldShowPostalCode(false);
-
-  }
-
-  @Override
-  protected void onFinishInflate() {
-    super.onFinishInflate();
-
-    Log.d("PaymentView ID", String.valueOf(paymentView.getId()));
-    Log.d("View ID", String.valueOf(cardMultilineView.getId()));
-
     paymentView.setCardValidCallback(new CardValidCallBack(paymentView, _context));
   }
 }

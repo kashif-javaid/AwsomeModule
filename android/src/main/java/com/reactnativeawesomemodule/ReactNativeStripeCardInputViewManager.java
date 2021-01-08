@@ -30,17 +30,6 @@ class ReactNativeStripeCardInputViewManager extends ViewGroupManager<LinearLayou
     );
   }
 
-//  public Map getExportedCustomBubblingEventTypeConstants() {
-//    return MapBuilder.builder()
-//      .put(
-//        "topTouch",
-//        MapBuilder.of(
-//          "phasedRegistrationNames",
-//          MapBuilder.of("bubbled", "onInputChange")))
-//      .build();
-//  }
-
-
   @NonNull
   @Override
   protected LinearLayout createViewInstance(@NonNull ThemedReactContext reactContext) {
