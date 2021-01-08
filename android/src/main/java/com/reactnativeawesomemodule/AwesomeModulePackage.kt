@@ -12,6 +12,7 @@ class AwesomeModulePackage : ReactPackage {
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-        return listOf(ReactNativeStripeCardInputViewManager())
+        return listOf(ReactNativeStripeCardInputViewManager(),
+          ReactNativeStripeCardInputTextManager())
     }
 }

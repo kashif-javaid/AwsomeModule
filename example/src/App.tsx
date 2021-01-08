@@ -3,6 +3,7 @@ import * as React from 'react';
 import { StyleSheet, View, Text, Platform } from 'react-native';
 import AwesomeModule, {
   ReactNativeStripeCardInput,
+  ReactNativeStripeCardInputText,
 } from 'react-native-awesome-module';
 
 export default function App() {
@@ -15,9 +16,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Result: {result}</Text>
-      <ReactNativeStripeCardInput
+      <ReactNativeStripeCardInputText
         text="Hello World"
-        onTouch={() => console.log('TOUCHED')}
+        onTouch={() => console.log('TOUCHED ReactNativeStripeCardInputText')}
         style={{
           backgroundColor: 'transparent',
           width: 300,
@@ -25,7 +26,7 @@ export default function App() {
           fontSize: 25,
         }}
       />
-      <ReactNativeStripeCardInput style={styles.cardInput} />
+      <ReactNativeStripeCardInput style={styles.cardInput} onInputChange={() => console.log('TOUCHED ReactNativeStripeCardInput')}/>
     </View>
   );
 }
