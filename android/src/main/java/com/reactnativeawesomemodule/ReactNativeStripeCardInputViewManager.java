@@ -34,25 +34,14 @@ class ReactNativeStripeCardInputViewManager extends ViewGroupManager<LinearLayou
     return REACT_CLASS;
   }
 
-//  @Override
-//  @Nullable
-//  public Map getExportedCustomDirectEventTypeConstants() {
-//    return MapBuilder.of(
-//      "onInputChanged",
-//      MapBuilder.of("registrationName", "onInputChanged")
-//    );
-//  }
-
-  public Map getExportedCustomBubblingEventTypeConstants() {
-    return MapBuilder.builder()
-      .put(
-        "topTouch",
-        MapBuilder.of(
-          "phasedRegistrationNames",
-          MapBuilder.of("bubbled", "onTouch")))
-      .build();
+  @Override
+  @Nullable
+  public Map getExportedCustomDirectEventTypeConstants() {
+    return MapBuilder.of(
+      "onInputChanged",
+      MapBuilder.of("registrationName", "onInputChanged")
+    );
   }
-
 
   @Override
   protected void addEventEmitters(@NonNull ThemedReactContext reactContext, @NonNull LinearLayout view) {
@@ -66,7 +55,7 @@ class ReactNativeStripeCardInputViewManager extends ViewGroupManager<LinearLayou
           .dispatchEvent(new Event(view.getId()) {
             @Override
             public String getEventName() {
-              return "topTouch";
+              return "onInputChanged";
             }
 
             @Override

@@ -28,7 +28,7 @@ export default function App() {
       />
       <ReactNativeStripeCardInput
         style={styles.cardInput}
-        onTouch={() => console.log('TOUCHED ReactNativeStripeCardInput')}
+        onInputChanged={() => console.log('✅ ReactNativeStripeCardInput')}
       />
     </View>
   );
